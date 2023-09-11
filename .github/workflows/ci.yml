@@ -19,25 +19,20 @@ jobs:
 
       - name: "[client] Install dependencies"
         run: |
-          cd client
           yarn install --frozen-lockfile
 
       - name: "[client] Run ESLint"
         run: |
-          cd client
           yarn eslint 'src/**/*.{ts,tsx}' --ext .tsx
 
       - name: "[client] Run Prettier"
         run: |
-          cd client
           yarn prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write
 
       - name: "[client] Run TypeScript compiler"
         run: |
-          cd client
           yarn tsc
 
       - name: "[client] Build"
         run: |
-          cd client
           yarn build
