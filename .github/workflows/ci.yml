@@ -1,0 +1,43 @@
+name: Workflow Name 
+
+on:
+  push:
+    branches: [main] 
+  pull_request:
+    branches: [main] 
+
+env:
+  ENV_TYPE: production
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: "[client] Install dependencies"
+        run: |
+          cd client
+          yarn install --frozen-lockfile
+
+      - name: "[client] Run ESLint"
+        run: |
+          cd client
+          yarn eslint 'src/**/*.{ts,tsx}' --ext .tsx
+
+      - name: "[client] Run Prettier"
+        run: |
+          cd client
+          yarn prettier --config .prettierrc 'src/**/*.{ts,tsx}' --write
+
+      - name: "[client] Run TypeScript compiler"
+        run: |
+          cd client
+          yarn tsc
+
+      - name: "[client] Build"
+        run: |
+          cd client
+          yarn build

@@ -1,0 +1,6 @@
+{
+  "*.(ts|tsx)": "eslint --fix",
+  "*.(ts)": "prettier --config .prettierrc --write",
+  "*.(tsx)": "prettier --config .prettierrc --write",
+  "*.py": "pylint"
+}
